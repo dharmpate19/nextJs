@@ -3,7 +3,7 @@
 import axios from "axios"
 import { redirect } from "next/navigation"
 import { UserType } from "@/app/_types/user"
-import { FromData } from "@/app/_types/formdata"
+import { setSession, deleteSession } from "../_lib/session"
 
 const API_URL = "http://localhost:3001"
 
@@ -15,6 +15,7 @@ console.log(response.data[0])
 const user : UserType  = response.data[0];
 if(!user) throw new Error("Invalid Credential")
     //Set user in cookies
+await setSession({name: user.name, email : user.email , id : user.id})
     console.log("Done")
 }catch (error) {
     throw new Error("User not logged in")
