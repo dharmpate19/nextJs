@@ -32,7 +32,7 @@ const ContactPage = async () => {
   }
   return (
     <>
-    <div className="flex justify-between items-center mb-6">
+    <div className="flex justify-between items-center mb-6 font-semibold">
       <h1>Your Contacts</h1>
       <a href="/contact/new" className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200">Add Contact</a>
     </div>
