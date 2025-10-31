@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import React from 'react'
+import BookEvents from '@/app/components/BookEvents';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 const EventDetailItem = ({ icon, alt, label }: { icon: string, alt: string, label: string }) => (
@@ -35,7 +36,9 @@ const EventsDetailPage = async ({ params }: { params: Promise<{ slug: string }> 
   const request = await fetch(`${BASE_URL}/api/events/${slug}`);
   const { event: { description, image, date, time, overview, agenda, location, mode, audience, tags, organizer } } = await request.json();
 
-  if (!description) return notFound()
+  if (!description) return notFound();
+
+  const booking = 10;
 
   return (
     <section id="event">
@@ -69,7 +72,17 @@ const EventsDetailPage = async ({ params }: { params: Promise<{ slug: string }> 
         </div>
         {/* Right Side - Booking Content */}
         <aside className="booking">
-          <p className='text-lg font-semibold'>Book Event</p>
+          <div className='signup-card'>
+            <h2>Book your spot</h2>
+            {booking > 0 ? (
+              <p className='text-sm'>
+                Join {booking} people who have already booked their spot!
+                </p>
+            ) : <p>Be the first to book your spot</p>
+            }
+
+            <BookEvents />
+          </div>
         </aside>
       </div>
     </section>
