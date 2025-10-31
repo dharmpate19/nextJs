@@ -46,3 +46,23 @@ The basic logic is that when we upload an image in JavaScript, the image is stor
 
 -Function to upload image to cloudinary
 we created function uploadresult that return pormise and for this we have imported library cloudinary and imported v2 as cloudinary and inside function we do cloudinary.uploader.upload_stream in that we pass object resource type that is image and folder name then we call the call back function that reutrn resolve if everything is resolved or reject if it has error finally we end this function by sending binary.
+
+
+--Route to get teh specific Event
+
+-To get the specific event we use []/route.tsx here when user interact by sending teh data they end slug we use that slug as params to gte value-We create Get function but befor thet we carete one variable that validate the value of slug
+-We wrap the params in context object because it returns promise and we also definetype  of params as promise and we return slug of type string in that promise.
+-In function for request we define _req because we are not requesting anything then we get params with type then we check it basic validation that if it does nto exist or it is not string or its value is not equals to zero
+-In that if any this exist we return the fuction with error
+-After that we do 2 level validation in that it convert that into uri and the reason for doin that is that if someone use url to navigate and add like tecch - feast-20 btu the url is tecch-feast-20 then the url will become tech%20-feast-20 and ackend will not understand what it is so we convert that using ddecodedURIComponent so this will convert tech%20-feast-20 to tech 20-feast-20 after that to remove extra space we do .trim() and then  to conver everything to lowercase we do .toLowerCase() thus we get the slug 
+-After that we run the main validation check which we created using variable if slug pass that test we send it to the database for query usign findOne()
+-But mongoDb return something with teh object like __v to remove thate we use -__v but we have to select that so taht we do .select("-__v") here - before means remove it and alsoo we conver that in string because select only understand string, after that we use .lean because it is still mongodb object nto javascript so to convert that into javascript we do .lean() then finally .exec() what it does is that it execute the slug like find data from mongodb and give it it ells the comand the the database query right now because without it the query is just created it will execute later.
+Then we convert that into an event by defining its typeas Ievet which is the type of all event.
+-Finally we give response using NexrResponse.json and if we receive any error we show then in catch error.
+
+--Front end to display events
+-To display single event in front end we use events/[slug]/age.tsx and in page we use params to get slug and after getting slug we use BASER_URL to get that data with the help of the url.
+-After getting the data we destruct the data.
+-Some data is repetative and in array so we create component for that.
+-We have three componenet eventsagenda, eventstag and eventsdetailitem.
+-Some are in array and in string so we parse them in array and get the first value and display it.
