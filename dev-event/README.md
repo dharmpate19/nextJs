@@ -66,3 +66,15 @@ Then we convert that into an event by defining its typeas Ievet which is the typ
 -Some data is repetative and in array so we create component for that.
 -We have three componenet eventsagenda, eventstag and eventsdetailitem.
 -Some are in array and in string so we parse them in array and get the first value and display it.
+
+--Server Action 
+-We created server action for form data where we use slug to find event.
+-After that we create similarEVent variabel to query and find similar data and in that query what we search si await Event.find({_id : {$ne : event?.id}, tags : {$id : event.?tag}}). Here $ne means id that is not equal to event.id means findl all that is not equal to event.ts and then $in the loop through array and do query in mongodb automitically, like ["One", "Number"] it will find all event that has similar tag to One or Number.
+-To show similar event we show that using event and run loop to show event card that we created
+-But there when we do query there was a probelm after completeg query each data is coverted into array thus when we do query it si always better to use .lean() to conver into js and then .exce() to execute.
+-To pass all event from bject we use {...event}
+
+--Caching
+-We use caching to cache the data we fo to the next.config.js and ake cahce component to true then we can cache any component we wantt or even the file.
+-We just have to add use cheche befrthe conponent we want to add for cacheing.
+-lafter we define cacheLife in hours oe minute.
