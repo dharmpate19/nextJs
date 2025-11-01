@@ -44,8 +44,6 @@ const EventsDetailPage = async ({ params }: { params: Promise<{ slug: string }> 
   const booking = 10;
 
   const SimilarEvents : IEvent[] = await getSimilarEventBySlug(slug);
-  console.log(SimilarEvents);
-
   return (
     <section id="event">
       <div className="header">
