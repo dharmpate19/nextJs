@@ -78,3 +78,7 @@ Then we convert that into an event by defining its typeas Ievet which is the typ
 -We use caching to cache the data we fo to the next.config.js and ake cahce component to true then we can cache any component we wantt or even the file.
 -We just have to add use cheche befrthe conponent we want to add for cacheing.
 -lafter we define cacheLife in hours oe minute.
+
+--Submit Booking
+-We create Booking action direclty from server actions where we paas eventId, slug and email
+-To keep track records we use postHog.
