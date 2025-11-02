@@ -40,7 +40,7 @@ const EventsDetailPage = async ({ params }: { params: Promise<{ slug: string }> 
   cacheLife('hours')
 
   const { slug } = await params;
-  const request = await fetch(`${BASE_URL}/api/events/${slug}`);
+  const request = await fetch(`http://dev-events-project.vercel.app/api/events/${slug}`);
   const { event: { description, image, date, time, overview, agenda, location, mode, audience, tags, organizer, _id } } = await request.json();
 
   if (!description) return notFound();
