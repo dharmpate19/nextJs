@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import React from 'react'
@@ -36,8 +37,8 @@ const EventTags = ({ tags }: { tags: string[] }) => (
 
 const EventsDetailPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
-  'use cache';
-  cacheLife('hours')
+  // 'use cache';
+  // cacheLife('hours')
 
   const { slug } = await params;
   const request = await fetch(`${BASE_URL}/api/events/${slug}`);
