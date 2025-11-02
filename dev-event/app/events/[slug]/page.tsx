@@ -42,7 +42,24 @@ const EventsDetailPage = async ({ params }: { params: Promise<{ slug: string }> 
 
   const { slug } = await params;
   const request = await fetch(`${BASE_URL}/api/events/${slug}`);
-  const { event: { description, image, date, time, overview, agenda, location, mode, audience, tags, organizer, _id } } = await request.json();
+
+if (!request.ok) {
+  console.error("Failed to fetch event:", await request.text());
+  return notFound();
+}
+
+let data;
+try {
+  data = await request.json();
+} catch (err) {
+  console.error("Invalid JSON response:", err);
+  return notFound();
+}
+
+if (!data?.event) return notFound();
+
+const { description, image, date, time, overview, agenda, location, mode, audience, tags, organizer, _id } = data.event;
+
 
   if (!description) return notFound();
 
