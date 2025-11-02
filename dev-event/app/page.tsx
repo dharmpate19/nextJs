@@ -10,7 +10,7 @@ const page = async() => {
 
   'use cache';
   cacheLife('hours')
-  const response = await fetch(`http://dev-events-project.vercel.app/api/events/api/events`);
+  const response = await fetch(`${BASE_URL}/api/events`);
   const {events} = await response.json()
 
   return (

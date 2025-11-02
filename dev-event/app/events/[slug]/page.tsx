@@ -40,18 +40,14 @@ const EventsDetailPage = async ({ params }: { params: Promise<{ slug: string }> 
   cacheLife('hours')
 
   const { slug } = await params;
-  const request = await fetch(`http://dev-events-project.vercel.app/api/events/${slug}`);
+  const request = await fetch(`${BASE_URL}/api/events/${slug}`);
   const { event: { description, image, date, time, overview, agenda, location, mode, audience, tags, organizer, _id } } = await request.json();
 
   if (!description) return notFound();
 
   const booking = 10;
 
-  
-
-  const SimilarEvents = await getSimilarEventBySlug(slug) as IEvent[] | null;
-
-  console.log(SimilarEvents);
+  const SimilarEvents = (await getSimilarEventBySlug(slug)) as unknown as IEvent[] | null;
 
   
   return (
@@ -103,7 +99,7 @@ const EventsDetailPage = async ({ params }: { params: Promise<{ slug: string }> 
         <h2>Similar Events</h2>
         <div className='events'>
           {SimilarEvents && SimilarEvents.map(event => (
-            <EventCard key={event._id} {...event} />
+            <EventCard key={event._id} event={event} />
           ))}
         </div>
       </div>
